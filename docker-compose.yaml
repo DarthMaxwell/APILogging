@@ -1,0 +1,27 @@
+services:
+  database:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: databaseadmin
+      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_DB: API_Logging_Database
+    ports:
+      - "5433:5432"
+    volumes:
+      -  API_Logging_Database_data:/var/lib/postgresql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  seq:
+    image: datalust/seq:latest
+    environment:
+      ACCEPT_EULA: Y
+      SEQ_FIRSTRUN_ADMINPASSWORD: yourpassword
+    ports:
+      - "5341:5341"
+      - "8081:80"
+    volumes:
+      - seq_data:/data
+
+volumes:
+  API_Logging_Database_data:
+  seq_data:

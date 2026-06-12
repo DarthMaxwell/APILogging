@@ -51,6 +51,7 @@ public class AuthenticationController : ControllerBase
         }
         
         IEnumerable<string> error = result.Errors.Select(e => e.Description);
+        _logger.LogWarning("Registration failed for {Username}: {Errors}", regdto.Username, string.Join(", ", error));
         return BadRequest(error);
     }
 
@@ -80,7 +81,7 @@ public class AuthenticationController : ControllerBase
         return Unauthorized("Invalid Credentials");
     }
 
-    [HttpGet("auth")]
+    [HttpGet("checkauth")]
     [Authorize]
     public async Task<IActionResult> CheckAuth()
     {
