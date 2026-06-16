@@ -17,7 +17,7 @@ public class RequestLoggingMiddleware
         string ip = context.Connection.RemoteIpAddress.ToString();
         string method = context.Request.Method;
         string path = context.Request.Path;
-        bool hasAPIKey = context.Request.Headers["JWTSomthing"].FirstOrDefault() != null;
+        bool hasAPIKey = context.Request.Headers["Authorization"].FirstOrDefault() != null;
 
         _logger.LogInformation($"IN:Proxy {method} {path} from {ip} {((hasAPIKey) ? "with key" : "without key")}");
 

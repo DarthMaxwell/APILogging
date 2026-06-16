@@ -16,6 +16,7 @@ services:
     environment:
       ACCEPT_EULA: Y
       SEQ_FIRSTRUN_ADMINPASSWORD: yourpassword
+      SEQ_FIRSTRUN_REQUIREAPIKEY: true
     ports:
       - "5341:5341"
       - "8081:80"
